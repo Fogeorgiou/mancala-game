@@ -5,7 +5,7 @@ import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class GameRoundParameters {
+public class GameRoundSelectionParameters {
 
     private int playerId;
     private int pitIndex;

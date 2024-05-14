@@ -17,16 +17,19 @@ public class GameController {
     @PostMapping("/new")
     public ResponseEntity<GameDto> startNewGame(@RequestParam(name = "number_of_stones_per_pit", defaultValue = "6", required = false) int numberOfStonesPerPit) {
 
-//        gameService.generateNewGame(numberOfStonesPerPit);
-
         return new ResponseEntity(gameService.generateNewGame(numberOfStonesPerPit), HttpStatus.CREATED);
     }
 
     @PutMapping("/play")
-    public void playGame(@RequestParam(name = "game_id") String gameId,
+    public ResponseEntity<GameDto> playGame(@RequestParam(name = "game_id") String gameId,
                          @RequestParam(name = "player_id") int playerId,
                          @RequestParam(name = "pit_index") int pitIndex) {
 
-        gameService.playGame(gameId, playerId, pitIndex);
+        return new ResponseEntity(gameService.playGame(gameId, playerId, pitIndex), HttpStatus.OK);
+    }
+
+    @GetMapping("/{gameId}")
+    public ResponseEntity<GameDto> getGame(@PathVariable String gameId) {
+        return new ResponseEntity(gameService.getGame(gameId), HttpStatus.OK);
     }
 }

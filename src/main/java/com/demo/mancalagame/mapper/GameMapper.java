@@ -16,14 +16,14 @@ public class GameMapper {
 
     public GameDto map(Game game) {
 
-        List<PitDto> pitDtoList = game.getBoard().getPits().stream().map(pit -> new PitDto(pit.getIndex(), pit.getNumberOfStones(), pit.getPlayerId())).collect(Collectors.toList());
+        List<PitDto> pitDtoList = game.getBoard().getPits().stream().map(pit -> new PitDto(pit.getId(), pit.getNumberOfStones(), pit.getPlayerId())).collect(Collectors.toList());
         BoardDto boardDto = new BoardDto(pitDtoList);
 
         List<PlayerDto> playerDtoList = game.getPlayers().stream().map(player -> new PlayerDto(player.getUsername())).collect(Collectors.toList());
 
-        Map<String, Integer> scoreDto = new HashMap<>();
-        for (Map.Entry<Player, Integer> scorePerPlayer : game.getScorePerPlayer().entrySet()) {
-            scoreDto.put(scorePerPlayer.getKey().getUsername(), scorePerPlayer.getValue());
+        Map<Integer, Integer> scoreDto = new HashMap<>();
+        for (Map.Entry<Integer, Integer> scorePerPlayer : game.getScorePerPlayer().entrySet()) {
+            scoreDto.put(scorePerPlayer.getKey(), scorePerPlayer.getValue());
         }
 
         return new GameDto(game.getGameId(), boardDto, playerDtoList, scoreDto);

@@ -6,5 +6,7 @@ public interface GameService {
 
     GameDto generateNewGame(int numberOfStonesPerPit);
 
-    void playGame(String gameId, int playerId, int pitIndex);
+    GameDto playGame(String gameId, int playerId, int pitIndex);
+
+    GameDto getGame(String gameId);
 }

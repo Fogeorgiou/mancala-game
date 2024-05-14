@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Pit {
 
-    private int index;
+    private int id;
     private int numberOfStones;
     private int playerId;
+    private boolean isLargePit;
 
 //    public int getNumberOfStones() {
 //        return numberOfStones;

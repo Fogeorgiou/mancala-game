@@ -22,6 +22,10 @@ public class Game {
     @Column(name="game_id")
     private String gameId;
 
+    @Column(name="game_status")
+    @JdbcTypeCode(SqlTypes.JSON)
+    private GameStatus gameStatus;
+
     @Column(name="board")
     @JdbcTypeCode(SqlTypes.JSON)
     private Board board;
@@ -32,14 +36,19 @@ public class Game {
 
     @Column(name="score_per_player")
     @JdbcTypeCode(SqlTypes.JSON)
-    private Map<Player, Integer> scorePerPlayer;
+    private Map<Integer, Integer> scorePerPlayer;
 
     @Column(name="player_turn")
     private int playerTurn;
 
+    @JdbcTypeCode(SqlTypes.JSON)
+    private Pit lastUpdatedPit;
+
     public Game(int numberOfStonesPerPit) {
 
         this.gameId = UUID.randomUUID().toString();
+
+        gameStatus = GameStatus.STARTED;
 
         createPlayers();
 
@@ -53,8 +62,9 @@ public class Game {
     private void createPlayers() {
 
         this.players = new ArrayList<>();
-        this.players.add(new Player("username1"));
-        this.players.add(new Player("username2"));
+        for (int i=1; i<=GameConstants.NUMBER_OF_PLAYERS; i++) {
+            this.players.add(new Player(i, new StringBuilder().append("username").append(i).toString()));
+        }
     }
 
     private void createInitialBoardSetup(int numberOfStonesPerPit) {
@@ -65,6 +75,6 @@ public class Game {
     private void initialiseScorePerPlayer() {
 
         this.scorePerPlayer = new HashMap<>();
-        this.players.forEach(player -> this.scorePerPlayer.put(player, GameConstants.ZERO));
+        this.players.forEach(player -> this.scorePerPlayer.put(player.getId(), GameConstants.ZERO));
     }
 }
