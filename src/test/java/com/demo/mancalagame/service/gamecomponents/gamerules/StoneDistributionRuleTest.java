@@ -1,8 +1,7 @@
-package com.demo.mancalagame.service.gamerules;
+package com.demo.mancalagame.service.gamecomponents.gamerules;
 
 import com.demo.mancalagame.entity.Game;
 import com.demo.mancalagame.entity.Pit;
-import com.demo.mancalagame.service.gamecomponents.gamerules.StoneDistributionRule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,23 +9,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StoneDistributionRuleTest {
 
-    StoneDistributionRule stoneDistributionRule;
+    private StoneDistributionRule stoneDistributionRule;
+    private Game game;
 
     @BeforeEach
     public void init() {
+
         stoneDistributionRule = new StoneDistributionRule();
+        // Set up a game
+        int numberOfStonesPerPit = 6;
+        game = new Game(numberOfStonesPerPit);
     }
 
     @Test
     public void Should_DistributeStonesFromSelectedPitToFollowingPits_When_SelectedPitContainsStones() {
 
-        // Set up a game
-        int numberOfStonesPerPit = 6;
-        Game game = new Game(numberOfStonesPerPit);
-
         // Set up game round selections
         int pitIndex = 2;
         int numberOfStones = 6;
+        // Represents the player currently playing
         int playerId = 1;
         Pit pitToPlayWith = new Pit(pitIndex, numberOfStones, playerId, false);
 
@@ -58,13 +59,10 @@ public class StoneDistributionRuleTest {
     @Test
     public void Should_DistributeStonesFromSelectedPitToFollowingPitsAndSkipOpponentLargePit_When_OpponentLargePitIsMet() {
 
-        // Set up a game
-        int numberOfStonesPerPit = 6;
-        Game game = new Game(numberOfStonesPerPit);
-
         // Set up game round selections
         int pitIndex = 4;
         int numberOfStones = 10;
+        // Represents the player currently playing
         int playerId = 1;
         Pit pitToPlayWith = new Pit(pitIndex, numberOfStones, playerId, false);
 

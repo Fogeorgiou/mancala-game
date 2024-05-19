@@ -3,7 +3,7 @@ package com.demo.mancalagame.service.gamecomponents.gamerules;
 import com.demo.mancalagame.entity.Game;
 import com.demo.mancalagame.entity.GameStatus;
 import com.demo.mancalagame.entity.Pit;
-import com.demo.mancalagame.util.GameConstants;
+import com.demo.mancalagame.service.gamecomponents.GameConstants;
 
 public class LastStoneOnEmptyPitRule extends GameRule {
 

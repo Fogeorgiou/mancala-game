@@ -1,6 +1,6 @@
 package com.demo.mancalagame.entity;
 
-import com.demo.mancalagame.util.GameConstants;
+import com.demo.mancalagame.service.gamecomponents.GameConstants;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -39,7 +39,10 @@ public class Game {
     private Map<Integer, Integer> scorePerPlayer;
 
     @Column(name="player_turn")
-    private int playerTurn;
+    private Integer playerTurn;
+
+    @Column(name="game_winner")
+    private Integer gameWinner;
 
     @JdbcTypeCode(SqlTypes.JSON)
     private Pit lastUpdatedPit;
@@ -57,6 +60,8 @@ public class Game {
         initialiseScorePerPlayer();
 
         playerTurn = this.players.get(0).getId();
+
+        gameWinner = null;
     }
 
     private void createPlayers() {

@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Pit {
 
@@ -13,12 +12,4 @@ public class Pit {
     private int numberOfStones;
     private int playerId;
     private boolean isLargePit;
-
-//    public int getNumberOfStones() {
-//        return numberOfStones;
-//    }
-//
-//    public int getPlayerId() {
-//        return playerId;
-//    }
 }

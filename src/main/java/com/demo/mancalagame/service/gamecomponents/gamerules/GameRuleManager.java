@@ -2,16 +2,12 @@ package com.demo.mancalagame.service.gamecomponents.gamerules;
 
 import com.demo.mancalagame.entity.Game;
 import com.demo.mancalagame.entity.GameStatus;
-import com.demo.mancalagame.util.GameRoundSelectionParameters;
-import lombok.Data;
 
-@Data
 public class GameRuleManager {
 
-    static GameRule lastRuleApplied;
-    static GameRule nextRuleToApply;
+    public static GameRule lastRuleApplied;
 
-    public static GameRule getNextRuleToApply(Game game, GameRoundSelectionParameters gameRoundSelectionParameters) {
+    public static GameRule getNextRuleToApply(Game game) {
         if (GameStatus.STARTED.equals(game.getGameStatus())) {
             game.setGameStatus(GameStatus.IN_PROGRESS);
             return new StoneDistributionRule();
@@ -21,7 +17,6 @@ public class GameRuleManager {
             } else if (lastRuleApplied instanceof LastStoneOnEmptyPitRule) {
                 return new LastStoneOnLargePitRule();
             } else if (lastRuleApplied instanceof LastStoneOnLargePitRule) {
-//                game.setGameStatus(GameStatus.CURRENT_PLAYER_MOVE_FINISHED);
                 return new StoneDistributionRule();
             }
         }

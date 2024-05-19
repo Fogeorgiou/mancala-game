@@ -1,8 +1,7 @@
-package com.demo.mancalagame.service.gamerules;
+package com.demo.mancalagame.service.gamecomponents.gamerules;
 
 import com.demo.mancalagame.entity.Game;
 import com.demo.mancalagame.entity.Pit;
-import com.demo.mancalagame.service.gamecomponents.gamerules.LastStoneOnEmptyPitRule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,19 +9,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LastStoneOnEmptyPitRuleTest {
 
-    LastStoneOnEmptyPitRule lastStoneOnEmptyPitRule;
+    private LastStoneOnEmptyPitRule lastStoneOnEmptyPitRule;
+    private Game game;
 
     @BeforeEach
     public void init() {
+
         lastStoneOnEmptyPitRule = new LastStoneOnEmptyPitRule();
+
+        // Set up a game
+        int numberOfStonesPerPit = 6;
+        game = new Game(numberOfStonesPerPit);
     }
 
     @Test
     public void Should_MoveStonesFromLastUpdatedPitAndOppositePitToPlayerLargePit_When_CurrentPlayerLastStoneEndsInEmptyPit() {
-
-        // Set up a game
-        int numberOfStonesPerPit = 6;
-        Game game = new Game(numberOfStonesPerPit);
 
         // Set up the last updated pit
         game.setLastUpdatedPit(new Pit(5, 1, 1, false));
@@ -30,6 +31,7 @@ public class LastStoneOnEmptyPitRuleTest {
         // Set up game round selections
         int pitIndex = 2;
         int numberOfStones = 6;
+        // Represents the player currently playing
         int playerId = 1;
         Pit pitToPlayWith = new Pit(pitIndex, numberOfStones, playerId, false);
 
@@ -51,11 +53,7 @@ public class LastStoneOnEmptyPitRuleTest {
     }
 
     @Test
-    public void Should_MakeNoChangesInTheStoneDistribution_When_CurrentPlayerLastStoneEndsInEmptyPit_And_OppositePitIsEmpty() {
-
-        // Set up a game
-        int numberOfStonesPerPit = 6;
-        Game game = new Game(numberOfStonesPerPit);
+    public void Should_MakeNoChangesToTheStoneDistribution_When_CurrentPlayerLastStoneEndsInEmptyPit_And_OppositePitIsEmpty() {
 
         // Set up the last updated pit
         game.setLastUpdatedPit(new Pit(5, 1, 1, false));
@@ -66,6 +64,7 @@ public class LastStoneOnEmptyPitRuleTest {
         // Set up game round selections
         int pitIndex = 2;
         int numberOfStones = 6;
+        // Represents the player currently playing
         int playerId = 1;
         Pit pitToPlayWith = new Pit(pitIndex, numberOfStones, playerId, false);
 

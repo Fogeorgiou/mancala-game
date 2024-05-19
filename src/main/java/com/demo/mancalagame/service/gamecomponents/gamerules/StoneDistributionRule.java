@@ -2,7 +2,7 @@ package com.demo.mancalagame.service.gamecomponents.gamerules;
 
 import com.demo.mancalagame.entity.Game;
 import com.demo.mancalagame.entity.Pit;
-import com.demo.mancalagame.util.GameConstants;
+import com.demo.mancalagame.service.gamecomponents.GameConstants;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class StoneDistributionRule extends GameRule {
         // The number of pits to be updated is equal to the number of stones contained in the pit of the request
         while (numberOfStonesLeftToBeDistributed > 0) {
 
-            if (pitIndexToUpdate >= pits.size()) {
+            if (pitIndexToUpdate > pits.size()) {
                 pitIndexToUpdate = 1;
             }
 

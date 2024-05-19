@@ -1,4 +1,4 @@
-package com.demo.mancalagame.util;
+package com.demo.mancalagame.service.gamecomponents;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,5 +8,5 @@ import lombok.Data;
 public class GameRoundSelectionParameters {
 
     private int playerId;
-    private int pitIndex;
+    private int pitId;
 }

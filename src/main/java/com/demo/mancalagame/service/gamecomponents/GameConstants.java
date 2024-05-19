@@ -1,4 +1,4 @@
-package com.demo.mancalagame.util;
+package com.demo.mancalagame.service.gamecomponents;
 
 public final class GameConstants {
 

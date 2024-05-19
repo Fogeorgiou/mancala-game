@@ -4,7 +4,7 @@ import com.demo.mancalagame.entity.Game;
 import com.demo.mancalagame.service.exception.ExceptionMessage;
 import com.demo.mancalagame.service.exception.InvalidPlayerException;
 import com.demo.mancalagame.service.exception.WrongPlayerTurnException;
-import com.demo.mancalagame.util.GameRoundSelectionParameters;
+import com.demo.mancalagame.service.gamecomponents.GameRoundSelectionParameters;
 
 public class PlayerValidation implements GameRoundParametersValidation {
 

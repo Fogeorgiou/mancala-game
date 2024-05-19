@@ -1,12 +1,13 @@
 package com.demo.mancalagame.entity;
 
-import com.demo.mancalagame.util.GameConstants;
+import com.demo.mancalagame.service.gamecomponents.GameConstants;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -24,11 +25,9 @@ public class Board {
 
         for (Player player : players) {
             for (int i = firstPitIndex; i < lastPitIndex; i++) {
-//                SmallPit smallPit = new SmallPit(i, numberOfStonesPerPit, player.getId());
                 pits.add(new Pit(i, numberOfStonesPerPit, player.getId(), false));
             }
 
-//            LargePit largePit = new LargePit(lastPitIndex, player.getId());
             pits.add(new Pit(lastPitIndex, GameConstants.ZERO, player.getId(), true));
 
             firstPitIndex = lastPitIndex + 1;
@@ -43,10 +42,34 @@ public class Board {
     }
 
     public Pit getLargePitByPlayerId(int playerId) {
-        Optional<Pit> largePit = pits.stream()
-                .filter(pit -> pit.isLargePit() && playerId == pit.getPlayerId())
+        Optional<Pit> largePitOptional = pits.stream()
+                .filter(pit -> pit.isLargePit())
+                .filter(pit -> playerId == pit.getPlayerId())
                 .findFirst();
 
-        return largePit.get();
+        return largePitOptional.isPresent() ? largePitOptional.get() : null;
+    }
+
+    public List<Pit> getAllSmallPitsByPlayerId(int playerId) {
+        return pits.stream()
+                .filter(pit -> !pit.isLargePit())
+                .filter(pit -> playerId == pit.getPlayerId())
+                .collect(Collectors.toList());
+    }
+
+    public int getAllStonesInSmallPitsByPlayerId(int playerId) {
+        int totalNumberOfStones = 0;
+        for (Pit pit : getAllSmallPitsByPlayerId(playerId)) {
+            totalNumberOfStones = totalNumberOfStones + pit.getNumberOfStones();
+        }
+        return totalNumberOfStones;
+    }
+
+    public boolean noStonesInPlayerPits(int playerId) {
+        List<Pit> smallPits = getAllSmallPitsByPlayerId(playerId);
+
+        return smallPits.stream()
+                .filter(pit -> pit.getNumberOfStones() == 0)
+                .count() == smallPits.size();
     }
 }

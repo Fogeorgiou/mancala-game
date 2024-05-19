@@ -1,6 +1,6 @@
 package com.demo.mancalagame.service.exception;
 
-public class WrongPlayerTurnException extends RuntimeException {
+public class WrongPlayerTurnException extends GameException {
 
     public WrongPlayerTurnException(String message) {
         super(message);

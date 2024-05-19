@@ -18,8 +18,9 @@ public class LastStoneOnLargePitRule extends GameRule {
         } else {
             int nextPlayerId;
             if (pitFromRequest.getPlayerId() == game.getPlayers().size()) {
-                // The next player to play should be first one in the list of players
-                nextPlayerId = 1;
+                // The next player to play should be the first one from the list of players
+//                nextPlayerId = 1;
+                nextPlayerId = game.getPlayers().get(0).getId();
             } else {
                 nextPlayerId = pitFromRequest.getPlayerId() + 1;
             }

@@ -1,24 +1,20 @@
 package com.demo.mancalagame.service.gamecomponents.gameroundvalidation;
 
 import com.demo.mancalagame.entity.Game;
-//import com.demo.mancalagame.entity.LargePit;
 import com.demo.mancalagame.entity.Pit;
-import com.demo.mancalagame.service.exception.ExceptionMessage;
-import com.demo.mancalagame.service.exception.InvalidPitException;
-import com.demo.mancalagame.service.exception.InvalidPitTypeException;
-import com.demo.mancalagame.service.exception.PitOwnershipException;
-import com.demo.mancalagame.util.GameConstants;
-import com.demo.mancalagame.util.GameRoundSelectionParameters;
+import com.demo.mancalagame.service.exception.*;
+import com.demo.mancalagame.service.gamecomponents.GameConstants;
+import com.demo.mancalagame.service.gamecomponents.GameRoundSelectionParameters;
 
 public class PitValidation implements GameRoundParametersValidation {
 
     @Override
     public void validate(GameRoundSelectionParameters gameRoundSelectionParameters, Game game) {
 
-        Pit pitFromRequest = game.getBoard().getPitById(gameRoundSelectionParameters.getPitIndex());
+        Pit pitFromRequest = game.getBoard().getPitById(gameRoundSelectionParameters.getPitId());
 
         // 1. Is the specified pit valid? If not, throw error with suitable message.
-        if (gameRoundSelectionParameters.getPitIndex() < 0 || gameRoundSelectionParameters.getPitIndex() >= GameConstants.TOTAL_NUMBER_OF_PITS) {
+        if (gameRoundSelectionParameters.getPitId() < 0 || gameRoundSelectionParameters.getPitId() > GameConstants.TOTAL_NUMBER_OF_PITS) {
             throw new InvalidPitException(ExceptionMessage.INVALID_PIT_ID);
         }
 
@@ -33,5 +29,8 @@ public class PitValidation implements GameRoundParametersValidation {
         }
 
         // 4. Are there any stones in the specified pit? If not, throw warning with suitable message.
+        if (pitFromRequest.getNumberOfStones() == 0) {
+            throw new EmptyPitException(ExceptionMessage.EMPTY_PIT);
+        }
     }
 }

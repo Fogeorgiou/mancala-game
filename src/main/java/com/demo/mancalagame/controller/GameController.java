@@ -23,9 +23,9 @@ public class GameController {
     @PutMapping("/play")
     public ResponseEntity<GameDto> playGame(@RequestParam(name = "game_id") String gameId,
                          @RequestParam(name = "player_id") int playerId,
-                         @RequestParam(name = "pit_index") int pitIndex) {
+                         @RequestParam(name = "pit_id") int pitId) {
 
-        return new ResponseEntity(gameService.playGame(gameId, playerId, pitIndex), HttpStatus.OK);
+        return new ResponseEntity(gameService.playGame(gameId, playerId, pitId), HttpStatus.OK);
     }
 
     @GetMapping("/{gameId}")
