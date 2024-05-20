@@ -12,7 +12,7 @@ Foteini Georgiou
 The current implementation assumes that the game will be played by 2 players.
 The game contains a board which is made up of two rows (one for each player) of six pits each.
 By default, six stones are placed in each of the 12 pits.
-Each player has a large pit (called "store" or “Mancala”) to the right of the six pits.
+Each player has a large pit (called "store" or “Mancala”) to the right of their six pits.
 
 ### Objective
 The objective of the game is to collect the most stones by the end of the game.
@@ -41,8 +41,8 @@ It can be imported and used for familiarisation with the API and testing.
 ## Install & Run
 
 ### Database setup
-For the application to work properly, the `mancala_game_db` db needs to be created and populated.
-The `mancala_game_db` db can be created using the sql query found in: [mancala_game_db-creation-query.sql](https://github.com/Fogeorgiou/mancala-game/blob/master/src/main/resources/static/db_queries/mancala_game_db-creation-query.sql)
+For the application to work properly, the `mancala_game_db` needs to be created and populated.
+The `mancala_game_db` can be created using the sql query found in: [mancala_game_db-creation-query.sql](https://github.com/Fogeorgiou/mancala-game/blob/master/src/main/resources/static/db_queries/mancala_game_db-creation-query.sql) .
 Then, the `game` table needs to be created using the sql queries found in: [game-table-creation-queries.sql](https://github.com/Fogeorgiou/mancala-game/blob/master/src/main/resources/static/db_queries/game-table-creation-queries.sql)
 
 ### Run
