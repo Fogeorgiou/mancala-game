@@ -3,6 +3,9 @@ package com.demo.mancalagame.service.gamecomponents.gamerules;
 import com.demo.mancalagame.entity.Game;
 import com.demo.mancalagame.entity.GameStatus;
 
+/**
+ * Decides, based on the game status and the rule that was last applied, which rule should be applied next.
+ */
 public class GameRuleManager {
 
     public static GameRule getNextRuleToApply(Game game) {

@@ -8,6 +8,11 @@ import com.demo.mancalagame.service.gamecomponents.gamerules.GameRule;
 import com.demo.mancalagame.service.gamecomponents.gamerules.GameRuleManager;
 import org.springframework.stereotype.Component;
 
+/**
+ * Runs a game round: applies the game rules and updates the score.
+ * If at any point it identifies that the game is finished, it makes the necessary updates to the game
+ * and sets the game winner.
+ */
 @Component
 public class GameRoundExecutor {
 
@@ -17,6 +22,7 @@ public class GameRoundExecutor {
         // This is the pit from where the player will move their stones.
         Pit pitFromRequest = game.getBoard().getPitById(gameRoundSelectionParameters.getPitId());
 
+        // Apply game rules
         GameRule nextRuleToApply = GameRuleManager.getNextRuleToApply(game);
         while (nextRuleToApply != null && GameStatus.IN_PROGRESS.equals(game.getGameStatus())) {
             nextRuleToApply.apply(game, pitFromRequest);
@@ -26,6 +32,7 @@ public class GameRoundExecutor {
         // Check if the game is finished, i.e. check that there are no more stones in any of the small pits of a player
         for (Player player : game.getPlayers()) {
             if (game.getBoard().noStonesInPlayerPits(player.getId())) {
+                // A player with no stones is his pits has been found. The game is now finished.
                 game.setGameStatus(GameStatus.FINISHED);
                 game.setPlayerTurn(null);
                 // For each of the rest of the players take all the stones from their small pits and place them
@@ -44,6 +51,7 @@ public class GameRoundExecutor {
             }
         }
 
+        // Update game score
         GameScoreManager.updateScorePerPlayer(game);
 
         if (!GameStatus.FINISHED.equals(game.getGameStatus())) {

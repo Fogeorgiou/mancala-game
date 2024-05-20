@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Represents the game board
+ */
 @Data
 @NoArgsConstructor
 public class Board {

@@ -4,6 +4,9 @@ import com.demo.mancalagame.entity.Game;
 import com.demo.mancalagame.entity.GameStatus;
 import com.demo.mancalagame.entity.Pit;
 
+/**
+ * Checks whether the last stone of a player ended in his large pit (Mancala).
+ */
 public class LastStoneOnLargePitRule extends GameRule {
 
     public LastStoneOnLargePitRule() {
@@ -21,7 +24,8 @@ public class LastStoneOnLargePitRule extends GameRule {
         } else {
             int nextPlayerId;
             if (pitFromRequest.getPlayerId() == game.getPlayers().size()) {
-                // The next player to play should be the first one from the list of players
+                // If the last player (from the list of players) has played, the next player to play
+                // should be the first one from that list.
                 nextPlayerId = game.getPlayers().get(0).getId();
             } else {
                 nextPlayerId = pitFromRequest.getPlayerId() + 1;

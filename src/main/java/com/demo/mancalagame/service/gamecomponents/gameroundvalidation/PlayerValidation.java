@@ -6,6 +6,9 @@ import com.demo.mancalagame.service.exception.InvalidPlayerException;
 import com.demo.mancalagame.service.exception.WrongPlayerTurnException;
 import com.demo.mancalagame.service.gamecomponents.GameRoundSelectionParameters;
 
+/**
+ * Validates the player that is about to play
+ */
 public class PlayerValidation implements GameRoundParametersValidation {
 
     @Override

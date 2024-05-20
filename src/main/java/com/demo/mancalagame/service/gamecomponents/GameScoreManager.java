@@ -4,6 +4,9 @@ import com.demo.mancalagame.entity.Game;
 
 import java.util.Map;
 
+/**
+ * Manages the game score while a game is in progress and identifies the winner once a game is finished
+ */
 public class GameScoreManager {
 
     public static void updateScorePerPlayer(Game game) {

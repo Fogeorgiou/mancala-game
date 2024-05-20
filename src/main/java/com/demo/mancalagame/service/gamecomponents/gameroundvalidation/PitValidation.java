@@ -6,6 +6,9 @@ import com.demo.mancalagame.service.exception.*;
 import com.demo.mancalagame.service.gamecomponents.GameConstants;
 import com.demo.mancalagame.service.gamecomponents.GameRoundSelectionParameters;
 
+/**
+ * Validates the pit that a player has selected to play with
+ */
 public class PitValidation implements GameRoundParametersValidation {
 
     @Override

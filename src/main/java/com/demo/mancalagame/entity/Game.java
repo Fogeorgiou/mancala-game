@@ -12,6 +12,9 @@ import org.hibernate.type.SqlTypes;
 
 import java.util.*;
 
+/**
+ * Represents a game
+ */
 @Data
 @NoArgsConstructor
 @Entity

@@ -42,8 +42,8 @@ It can be imported and used for familiarisation with the API and testing.
 
 ### Database setup
 For the application to work properly, the `mancala_game_db` db needs to be created and populated.
-The `mancala_game_db` db can be created using the sql query found in: [mancala_game_db-creation-query.sql]()
-Then, the `game` table needs to be created using the sql queries found in: [game-table-creation-queries.sql]()
+The `mancala_game_db` db can be created using the sql query found in: [mancala_game_db-creation-query.sql](https://github.com/Fogeorgiou/mancala-game/blob/master/src/main/resources/static/db_queries/mancala_game_db-creation-query.sql)
+Then, the `game` table needs to be created using the sql queries found in: [game-table-creation-queries.sql](https://github.com/Fogeorgiou/mancala-game/blob/master/src/main/resources/static/db_queries/game-table-creation-queries.sql)
 
 ### Run
 1. Clone the git repository:
@@ -62,5 +62,5 @@ or by running the `MancalaGameApplication` class. The app should then be availab
 Using the endpoints mentioned above, the game can be played.
 
 ## Notes
-The file [example-game-flow.txt]() contains the steps of a simplified version of the game (with 4 stones per pit) that 
+The file [example-game-flow.txt](https://github.com/Fogeorgiou/mancala-game/blob/master/src/main/resources/static/example-game-flow.txt) contains the steps of a simplified version of the game (with 4 stones per pit) that 
 lead easily and quickly to a finished game.

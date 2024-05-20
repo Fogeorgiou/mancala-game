@@ -6,6 +6,9 @@ import com.demo.mancalagame.service.gamecomponents.GameConstants;
 
 import java.util.List;
 
+/**
+ * Performs the distribution of stones based on the pit a player has selected to play with.
+ */
 public class StoneDistributionRule extends GameRule {
 
     public StoneDistributionRule() {
@@ -31,6 +34,7 @@ public class StoneDistributionRule extends GameRule {
             }
 
             Pit pitToUpdate = game.getBoard().getPitById(pitIndexToUpdate);
+            // A stone cannot be placed in the opponent's large pit.
             if (!isLargePitOfTheOpponent(pitToUpdate, pitFromRequest.getPlayerId())) {
                 pitToUpdate.setNumberOfStones(pitToUpdate.getNumberOfStones() + GameConstants.ONE);
                 numberOfStonesLeftToBeDistributed--;
