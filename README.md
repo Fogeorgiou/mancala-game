@@ -3,21 +3,21 @@
 ## Overview
 This project is a back-end implementation of the Mancala Game using Java and Spring Boot.
 
-##Authors
+## Authors
 Foteini Georgiou
 
 ## Mancala game basics
 
-### Set up
+### Setup
 The current implementation assumes that the game will be played by 2 players.
 The game contains a board which is made up of two rows (one for each player) of six pits each.
 By default, six stones are placed in each of the 12 pits.
 Each player has a large pit (called "store" or “Mancala”) to the right of the six pits.
 
-### Objective:
+### Objective
 The objective of the game is to collect the most stones by the end of the game.
 
-### Game Rules:
+### Game Rules
 1. The game begins with one player picking up all the stones from any of his own six pits.
 2. Moving counter-clockwise, the player sows the stones one in each of the following pits until the stones run out.
 3. If the player runs into his own Mancala, then the player can sow one stone in it. If the player runs into his opponent's Mancala, the player needs to skip it and
@@ -35,7 +35,7 @@ The current implementation supports 3 endpoints:
 2. 'Play game' endpoint - it is used every time a player wants to play and make his next move
 3. 'Get game' endpoint - it returns the details of the requested game
 
-A Postman collection containing the calls to these endpoints is provided in the directory `postman`
+A Postman collection containing the calls to these endpoints is provided in the directory `postman`.
 It can be imported and used for familiarisation with the API and testing.
 
 ## Install & Run
