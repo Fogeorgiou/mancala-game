@@ -1,6 +1,7 @@
 package com.demo.mancalagame.controller;
 
 import com.demo.mancalagame.service.GameService;
+import com.demo.mancalagame.service.exception.*;
 import com.demo.mancalagame.util.GameTestUtilities;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.util.StreamUtils;
 import java.nio.charset.Charset;
 
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -40,6 +41,8 @@ public class GameControllerTest {
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(content().string(is(expectedGame)));
+
+        verify(gameService).generateNewGame(eq(numberOfStonesPerPit));
     }
 
     @Test
@@ -55,13 +58,149 @@ public class GameControllerTest {
 
         this.mockMvc.perform(
                     put(new StringBuilder().append("/games/play")
-                            .append("?game_id=123&player_id=1&pit_id=1")
+                            .append(String.format("?game_id=%s&player_id=%s&pit_id=%s", gameId, playerId, pitId))
                             .toString()
                     )
                 )
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(is(expectedGame)));
+
+        verify(gameService).playGame(eq(gameId), eq(playerId), eq(pitId));
+    }
+
+    @Test
+    void Should_Return404Response_When_RequestedGameToPlayWithIsNotFound() throws Exception {
+        String gameId = "123";
+        int playerId = 1;
+        int pitId = 1;
+
+        doThrow(new GameNotFoundException(ExceptionMessage.GAME_NOT_FOUND))
+                .when(gameService).playGame(gameId, playerId, pitId);
+
+        this.mockMvc.perform(
+                        put(new StringBuilder().append("/games/play")
+                                .append(String.format("?game_id=%s&player_id=%s&pit_id=%s", gameId, playerId, pitId))
+                                .toString()
+                        )
+                )
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(content().string(is(ExceptionMessage.GAME_NOT_FOUND)));
+
+        verify(gameService).playGame(eq(gameId), eq(playerId), eq(pitId));
+    }
+
+    @Test
+    void Should_Return400Response_When_RequestedPlayerIdIsInvalid() throws Exception {
+        String gameId = "123";
+        int playerId = 5;
+        int pitId = 1;
+
+        doThrow(new InvalidPlayerException(ExceptionMessage.INVALID_PLAYER_ID))
+                .when(gameService).playGame(gameId, playerId, pitId);
+
+        this.mockMvc.perform(
+                        put(new StringBuilder().append("/games/play")
+                                .append(String.format("?game_id=%s&player_id=%s&pit_id=%s", gameId, playerId, pitId))
+                                .toString()
+                        )
+                )
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string(
+                        is(
+                            new StringBuilder()
+                                    .append("Bad request: ")
+                                    .append(ExceptionMessage.INVALID_PLAYER_ID)
+                                    .toString()
+                        )
+                ));
+
+        verify(gameService).playGame(eq(gameId), eq(playerId), eq(pitId));
+    }
+
+    @Test
+    void Should_Return400Response_When_ItIsNotTheRequestedPlayerTurnToPlay() throws Exception {
+        String gameId = "123";
+        int playerId = 2;
+        int pitId = 1;
+
+        doThrow(new WrongPlayerTurnException(ExceptionMessage.WRONG_PLAYER_TURN))
+                .when(gameService).playGame(gameId, playerId, pitId);
+
+        this.mockMvc.perform(
+                        put(new StringBuilder().append("/games/play")
+                                .append(String.format("?game_id=%s&player_id=%s&pit_id=%s", gameId, playerId, pitId))
+                                .toString()
+                        )
+                )
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string(
+                        is(
+                                new StringBuilder()
+                                        .append("Bad request: ")
+                                        .append(ExceptionMessage.WRONG_PLAYER_TURN)
+                                        .toString()
+                        )
+                ));
+
+        verify(gameService).playGame(eq(gameId), eq(playerId), eq(pitId));
+    }
+
+    @Test
+    void Should_Return400Response_When_RequestedPitIdIsInvalid() throws Exception {
+        String gameId = "123";
+        int playerId = 1;
+        int pitId = 20;
+
+        doThrow(new InvalidPitException(ExceptionMessage.INVALID_PIT_ID))
+                .when(gameService).playGame(gameId, playerId, pitId);
+
+        this.mockMvc.perform(
+                        put(new StringBuilder().append("/games/play")
+                                .append(String.format("?game_id=%s&player_id=%s&pit_id=%s", gameId, playerId, pitId))
+                                .toString()
+                        )
+                )
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string(
+                        is(
+                                new StringBuilder()
+                                        .append("Bad request: ")
+                                        .append(ExceptionMessage.INVALID_PIT_ID)
+                                        .toString()
+                        )
+                ));
+
+        verify(gameService).playGame(eq(gameId), eq(playerId), eq(pitId));
+    }
+
+    @Test
+    void Should_Return400Response_When_RequestedPitIdIsZero() throws Exception {
+        String gameId = "123";
+        int playerId = 1;
+        int pitId = 0;
+
+        this.mockMvc.perform(
+                        put(new StringBuilder().append("/games/play")
+                                .append(String.format("?game_id=%s&player_id=%s&pit_id=%s", gameId, playerId, pitId))
+                                .toString()
+                        )
+                )
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string(
+                        is(
+                                new StringBuilder()
+                                        .append("Bad request: playGame.pitId: must be greater than or equal to 1")
+                                        .toString()
+                        )
+                ));
+
+        verify(gameService, never()).playGame(anyString(), anyInt(), anyInt());
     }
 
     @Test
@@ -78,5 +217,22 @@ public class GameControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(is(expectedGame)));
+
+        verify(gameService).getGame(eq(gameId));
+    }
+
+    @Test
+    void Should_Return404Response_When_RequestedGameIsNotFound() throws Exception {
+        String gameId = "123";
+
+        doThrow(new GameNotFoundException(ExceptionMessage.GAME_NOT_FOUND))
+                .when(gameService).getGame(gameId);
+
+        this.mockMvc.perform(get(new StringBuilder().append("/games/").append(gameId).toString()))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(content().string(is(ExceptionMessage.GAME_NOT_FOUND)));
+
+        verify(gameService).getGame(eq(gameId));
     }
 }

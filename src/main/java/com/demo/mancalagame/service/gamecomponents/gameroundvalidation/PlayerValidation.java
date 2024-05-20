@@ -12,7 +12,9 @@ public class PlayerValidation implements GameRoundParametersValidation {
     public void validate(GameRoundSelectionParameters gameRoundSelectionParameters, Game game) {
 
         // 1. Is the specified player valid? If not, throw error with suitable message.
-        if (!(gameRoundSelectionParameters.getPlayerId() == 1 || gameRoundSelectionParameters.getPlayerId() == 2)) {
+        if (!game.getPlayers().stream()
+                .map(player -> player.getId()).toList()
+                .contains(gameRoundSelectionParameters.getPlayerId())) {
             throw new InvalidPlayerException(ExceptionMessage.INVALID_PLAYER_ID);
         }
 

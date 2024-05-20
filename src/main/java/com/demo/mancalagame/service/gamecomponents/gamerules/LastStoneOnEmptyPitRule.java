@@ -7,6 +7,10 @@ import com.demo.mancalagame.service.gamecomponents.GameConstants;
 
 public class LastStoneOnEmptyPitRule extends GameRule {
 
+    public LastStoneOnEmptyPitRule() {
+        this.ruleName = RuleName.LAST_STONE_ON_EMPTY_PIT_RULE.toString();
+    }
+
     @Override
     public void apply(Game game, Pit pitFromRequest) {
 
@@ -30,6 +34,6 @@ public class LastStoneOnEmptyPitRule extends GameRule {
             game.setGameStatus(GameStatus.CURRENT_PLAYER_MOVE_FINISHED);
         }
 
-        GameRuleManager.lastRuleApplied = this;
+        game.setLastRuleApplied(this.ruleName);
     }
 }

@@ -1,0 +1,79 @@
+----Initial board setup----
+Player B:   (B6)4  (B5)4  (B4)4  (B3)4  (B2)4  (B1)4
+            Mancala B (0)
+Player A:   (A1)4  (A2)4  (A3)4  (A4)4  (A5)4  (A6)4
+            Mancala A (0)
+-------------------------------------------------------------------------------------------------------------
+----Player A plays and selects pit A1----
+Player B:   (B6)4  (B5)4  (B4)4  (B3)4  (B2)4  (B1)4
+            Mancala B (0)
+Player A:   (A1)0  (A2)5  (A3)5  (A4)5  (A5)5  (A6)4
+            Mancala A (0)
+-------------------------------------------------------------------------------------------------------------
+----Player B plays and selects pit B1----
+Player B:   (B6)4  (B5)5  (B4)5  (B3)5  (B2)5  (B1)0
+            Mancala B (0)
+Player A:   (A1)0  (A2)5  (A3)5  (A4)5  (A5)5  (A6)4
+            Mancala A (0)
+-------------------------------------------------------------------------------------------------------------
+----Player A plays and selects pit A2----
+Player B:   (B6)4  (B5)5  (B4)5  (B3)5  (B2)5  (B1)0
+            Mancala B (0)
+Player A:   (A1)0  (A2)0  (A3)6  (A4)6  (A5)6  (A6)5
+            Mancala A (1)
+-------------------------------------------------------------------------------------------------------------
+----Player A plays again (as in the previous step his last stone ended in his Mancala) and selects pit A3----
+Player B:   (B6)4  (B5)5  (B4)5  (B3)5  (B2)6  (B1)1
+            Mancala B (0)
+Player A:   (A1)0  (A2)0  (A3)0  (A4)7  (A5)7  (A6)6
+            Mancala A (2)
+-------------------------------------------------------------------------------------------------------------
+----Player B plays and selects pit B1----
+Player B:   (B6)4  (B5)5  (B4)5  (B3)5  (B2)7  (B1)0
+            Mancala B (0)
+Player A:   (A1)0  (A2)0  (A3)0  (A4)7  (A5)7  (A6)6
+            Mancala A (2)
+-------------------------------------------------------------------------------------------------------------
+----Player A plays and selects pit A4----
+Player B:   (B6)4  (B5)5  (B4)6  (B3)6  (B2)8  (B1)1
+            Mancala B (0)
+Player A:   (A1)0  (A2)0  (A3)0  (A4)0  (A5)8  (A6)7
+            Mancala A (3)
+-------------------------------------------------------------------------------------------------------------
+----Player B plays and selects pit B1----
+Player B:   (B6)4  (B5)5  (B4)6  (B3)6  (B2)9  (B1)0
+            Mancala B (0)
+Player A:   (A1)0  (A2)0  (A3)0  (A4)0  (A5)8  (A6)7
+            Mancala A (3)
+-------------------------------------------------------------------------------------------------------------
+----Player A plays and selects pit A5----
+Player B:   (B6)5  (B5)6  (B4)7  (B3)7  (B2)10  (B1)1
+            Mancala B (0)
+Player A:   (A1)0  (A2)0  (A3)0  (A4)0  (A5)0  (A6)8
+            Mancala A (4)
+-------------------------------------------------------------------------------------------------------------
+----Player B plays and selects pit B1----
+Player B:   (B6)5  (B5)6  (B4)7  (B3)7  (B2)11  (B1)0
+            Mancala B (0)
+Player A:   (A1)0  (A2)0  (A3)0  (A4)0  (A5)0  (A6)8
+            Mancala A (4)
+-------------------------------------------------------------------------------------------------------------
+----Player A plays and selects pit A6. During the stone distribution, Mancala B is skipped.----
+Player B:   (B6)6  (B5)7  (B4)8  (B3)8  (B2)12  (B1)1
+            Mancala B (0)
+Player A:   (A1)1  (A2)0  (A3)0  (A4)0  (A5)0  (A6)0
+            Mancala A (5)
+-------------------------------------------------------------------------------------------------------------
+----The last stone of Player A ended in an empty pit of his own. The stones from pits A1 and B6 are put into Mancala A.----
+Player B:   (B6)0  (B5)7  (B4)8  (B3)8  (B2)12  (B1)1
+            Mancala B (0)
+Player A:   (A1)0  (A2)0  (A3)0  (A4)0  (A5)0  (A6)0
+            Mancala A (12)
+-------------------------------------------------------------------------------------------------------------
+----All the pits of player A are empty, so the game is finished. All the stones from the player B pits are put into Mancala B----
+Player B:   (B6)0  (B5)7  (B4)8  (B3)8  (B2)12  (B1)1
+            Mancala B (36)
+Player A:   (A1)0  (A2)0  (A3)0  (A4)0  (A5)0  (A6)0
+            Mancala A (12)
+-------------------------------------------------------------------------------------------------------------
+The winner of the game is player B.

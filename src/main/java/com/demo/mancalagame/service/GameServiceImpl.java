@@ -69,12 +69,7 @@ public class GameServiceImpl implements GameService {
         PitValidation pitValidation = new PitValidation();
         pitValidation.validate(gameRoundSelectionParameters, game);
 
-//        // Get specified pit from board. This is the pit from where the player will move their stones.
-//        Pit pitFromRequest = game.getBoard().getPitByIndex(gameRoundSelectionParameters.getPitIndex());
-
         gameRoundExecutor.play(game, gameRoundSelectionParameters);
-
-//        game.setGameStatus(GameStatus.IN_PROGRESS);
 
         gameRepository.save(game);
 

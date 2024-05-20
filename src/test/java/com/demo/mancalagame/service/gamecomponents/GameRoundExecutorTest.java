@@ -2,8 +2,7 @@ package com.demo.mancalagame.service.gamecomponents;
 
 import com.demo.mancalagame.entity.Game;
 import com.demo.mancalagame.entity.GameStatus;
-import com.demo.mancalagame.service.gamecomponents.gamerules.GameRuleManager;
-import com.demo.mancalagame.service.gamecomponents.gamerules.LastStoneOnLargePitRule;
+import com.demo.mancalagame.service.gamecomponents.gamerules.GameRule;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -77,7 +76,7 @@ public class GameRoundExecutorTest {
         // The score for player 1 is set to 1 as there is 1 stone in their large pit
         game.getScorePerPlayer().put(firstPlayerId, 1);
 
-        GameRuleManager.lastRuleApplied = new LastStoneOnLargePitRule();
+        game.setLastRuleApplied(GameRule.RuleName.LAST_STONE_ON_LARGE_PIT_RULE.toString());
 
         int pitId = 9;
         GameRoundSelectionParameters gameRoundSelectionParameters = new GameRoundSelectionParameters(secondPlayerId, pitId);
@@ -130,7 +129,7 @@ public class GameRoundExecutorTest {
         // The score for player 1 is set to 1 as there is 1 stone in their large pit
         game.getScorePerPlayer().put(firstPlayerId, 5);
 
-        GameRuleManager.lastRuleApplied = new LastStoneOnLargePitRule();
+        game.setLastRuleApplied(GameRule.RuleName.LAST_STONE_ON_LARGE_PIT_RULE.toString());
 
         int pitId = 6;
         GameRoundSelectionParameters gameRoundSelectionParameters = new GameRoundSelectionParameters(firstPlayerId, pitId);
@@ -153,7 +152,6 @@ public class GameRoundExecutorTest {
         assertEquals(0, game.getBoard().getPitById(12).getNumberOfStones());
         assertEquals(0, game.getBoard().getPitById(13).getNumberOfStones());
         assertEquals(36, game.getBoard().getPitById(14).getNumberOfStones());
-
 
         assertNull(game.getPlayerTurn());
 

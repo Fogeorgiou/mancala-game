@@ -34,7 +34,7 @@ public class GameRuleManagerTest {
     public void Should_ReturnLastStoneOnEmptyPitRuleAsNextRuleToApply_When_GameStatusIsInProgress_And_LastRuleAppliedWasStoneDistributionRule() {
 
         game.setGameStatus(GameStatus.IN_PROGRESS);
-        GameRuleManager.lastRuleApplied = new StoneDistributionRule();
+        game.setLastRuleApplied(GameRule.RuleName.STONE_DISTRIBUTION_RULE.toString());
 
         GameRule nextRuleToApply = GameRuleManager.getNextRuleToApply(game);
 
@@ -45,7 +45,7 @@ public class GameRuleManagerTest {
     public void Should_ReturnLastStoneOnLargePitRuleAsNextRuleToApply_When_GameStatusIsInProgress_And_LastRuleAppliedWasLastStoneOnEmptyPitRule() {
 
         game.setGameStatus(GameStatus.IN_PROGRESS);
-        GameRuleManager.lastRuleApplied = new LastStoneOnEmptyPitRule();
+        game.setLastRuleApplied(GameRule.RuleName.LAST_STONE_ON_EMPTY_PIT_RULE.toString());
 
         GameRule nextRuleToApply = GameRuleManager.getNextRuleToApply(game);
 
@@ -56,7 +56,7 @@ public class GameRuleManagerTest {
     public void Should_ReturnStoneDistributionRuleAsNextRuleToApply_When_GameStatusIsInProgress_And_LastRuleAppliedWasLastStoneOnLargePitRule() {
 
         game.setGameStatus(GameStatus.IN_PROGRESS);
-        GameRuleManager.lastRuleApplied = new LastStoneOnLargePitRule();
+        game.setLastRuleApplied(GameRule.RuleName.LAST_STONE_ON_LARGE_PIT_RULE.toString());
 
         GameRule nextRuleToApply = GameRuleManager.getNextRuleToApply(game);
 

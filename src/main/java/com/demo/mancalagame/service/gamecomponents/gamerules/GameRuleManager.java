@@ -5,18 +5,16 @@ import com.demo.mancalagame.entity.GameStatus;
 
 public class GameRuleManager {
 
-    public static GameRule lastRuleApplied;
-
     public static GameRule getNextRuleToApply(Game game) {
         if (GameStatus.STARTED.equals(game.getGameStatus())) {
             game.setGameStatus(GameStatus.IN_PROGRESS);
             return new StoneDistributionRule();
         } else if (GameStatus.IN_PROGRESS.equals(game.getGameStatus())) {
-            if (lastRuleApplied instanceof StoneDistributionRule) {
+            if (GameRule.RuleName.STONE_DISTRIBUTION_RULE.toString().equals(game.getLastRuleApplied())) {
                 return new LastStoneOnEmptyPitRule();
-            } else if (lastRuleApplied instanceof LastStoneOnEmptyPitRule) {
+            } else if (GameRule.RuleName.LAST_STONE_ON_EMPTY_PIT_RULE.toString().equals(game.getLastRuleApplied())) {
                 return new LastStoneOnLargePitRule();
-            } else if (lastRuleApplied instanceof LastStoneOnLargePitRule) {
+            } else if (GameRule.RuleName.LAST_STONE_ON_LARGE_PIT_RULE.toString().equals(game.getLastRuleApplied())) {
                 return new StoneDistributionRule();
             }
         }

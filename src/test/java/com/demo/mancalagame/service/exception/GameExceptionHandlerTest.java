@@ -1,5 +1,6 @@
 package com.demo.mancalagame.service.exception;
 
+import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -35,5 +36,17 @@ public class GameExceptionHandlerTest {
 
         assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
         assertEquals(ExceptionMessage.GAME_NOT_FOUND, responseEntity.getBody());
+    }
+
+    @Test
+    public void Should_HandleConstraintViolationException_And_ReturnResponseWithAppropriateMessage() {
+
+        ConstraintViolationException constraintViolationException = new ConstraintViolationException("playGame.gameId: must not be blank", null);
+
+        ResponseEntity<String> responseEntity =
+                gameExceptionHandler.handleConstraintViolationException(constraintViolationException);
+
+        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
+        assertEquals("Bad request: " + constraintViolationException.getMessage(), responseEntity.getBody());
     }
 }

@@ -8,6 +8,10 @@ import java.util.List;
 
 public class StoneDistributionRule extends GameRule {
 
+    public StoneDistributionRule() {
+        this.ruleName = RuleName.STONE_DISTRIBUTION_RULE.toString();
+    }
+
     @Override
     public void apply(Game game, Pit pitFromRequest) {
 
@@ -40,7 +44,7 @@ public class StoneDistributionRule extends GameRule {
 
         game.setLastUpdatedPit(game.getBoard().getPitById(pitIndexToUpdate-1));
 
-        GameRuleManager.lastRuleApplied = this;
+        game.setLastRuleApplied(this.ruleName);
     }
 
     private boolean isLargePitOfTheOpponent(Pit pit, int playerId) {

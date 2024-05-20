@@ -1,11 +1,14 @@
 package com.demo.mancalagame.service.gamecomponents.gamerules;
 
 import com.demo.mancalagame.entity.Game;
-//import com.demo.mancalagame.entity.LargePit;
 import com.demo.mancalagame.entity.GameStatus;
 import com.demo.mancalagame.entity.Pit;
 
 public class LastStoneOnLargePitRule extends GameRule {
+
+    public LastStoneOnLargePitRule() {
+        this.ruleName = RuleName.LAST_STONE_ON_LARGE_PIT_RULE.toString();
+    }
 
     @Override
     public void apply(Game game, Pit pitFromRequest) {
@@ -19,7 +22,6 @@ public class LastStoneOnLargePitRule extends GameRule {
             int nextPlayerId;
             if (pitFromRequest.getPlayerId() == game.getPlayers().size()) {
                 // The next player to play should be the first one from the list of players
-//                nextPlayerId = 1;
                 nextPlayerId = game.getPlayers().get(0).getId();
             } else {
                 nextPlayerId = pitFromRequest.getPlayerId() + 1;
@@ -27,7 +29,7 @@ public class LastStoneOnLargePitRule extends GameRule {
             game.setPlayerTurn(nextPlayerId);
         }
 
-        GameRuleManager.lastRuleApplied = this;
+        game.setLastRuleApplied(this.ruleName);
 
         game.setGameStatus(GameStatus.CURRENT_PLAYER_MOVE_FINISHED);
     }

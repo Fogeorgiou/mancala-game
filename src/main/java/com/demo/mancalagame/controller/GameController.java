@@ -2,13 +2,17 @@ package com.demo.mancalagame.controller;
 
 import com.demo.mancalagame.dto.GameDto;
 import com.demo.mancalagame.service.GameService;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/games")
+@Validated
 public class GameController {
 
     @Autowired
@@ -21,15 +25,15 @@ public class GameController {
     }
 
     @PutMapping("/play")
-    public ResponseEntity<GameDto> playGame(@RequestParam(name = "game_id") String gameId,
-                         @RequestParam(name = "player_id") int playerId,
-                         @RequestParam(name = "pit_id") int pitId) {
+    public ResponseEntity<GameDto> playGame(@RequestParam(name = "game_id") @NotBlank String gameId,
+                         @RequestParam(name = "player_id") @Min(1) int playerId,
+                         @RequestParam(name = "pit_id") @Min(1) int pitId) {
 
         return new ResponseEntity(gameService.playGame(gameId, playerId, pitId), HttpStatus.OK);
     }
 
     @GetMapping("/{gameId}")
-    public ResponseEntity<GameDto> getGame(@PathVariable String gameId) {
+    public ResponseEntity<GameDto> getGame(@PathVariable @NotBlank String gameId) {
         return new ResponseEntity(gameService.getGame(gameId), HttpStatus.OK);
     }
 }

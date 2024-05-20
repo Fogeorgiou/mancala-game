@@ -47,6 +47,8 @@ public class Game {
     @JdbcTypeCode(SqlTypes.JSON)
     private Pit lastUpdatedPit;
 
+    private String lastRuleApplied;
+
     public Game(int numberOfStonesPerPit) {
 
         this.gameId = UUID.randomUUID().toString();

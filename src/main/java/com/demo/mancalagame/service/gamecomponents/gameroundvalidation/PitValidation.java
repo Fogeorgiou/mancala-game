@@ -14,7 +14,7 @@ public class PitValidation implements GameRoundParametersValidation {
         Pit pitFromRequest = game.getBoard().getPitById(gameRoundSelectionParameters.getPitId());
 
         // 1. Is the specified pit valid? If not, throw error with suitable message.
-        if (gameRoundSelectionParameters.getPitId() < 0 || gameRoundSelectionParameters.getPitId() > GameConstants.TOTAL_NUMBER_OF_PITS) {
+        if (gameRoundSelectionParameters.getPitId() > GameConstants.TOTAL_NUMBER_OF_PITS) {
             throw new InvalidPitException(ExceptionMessage.INVALID_PIT_ID);
         }
 
