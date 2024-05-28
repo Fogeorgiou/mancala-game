@@ -1,0 +1,24 @@
+#version: '1'
+services:
+  mysqldb:
+    image: mysql:8.3.0
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: mancala_game_db
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: adminfoteini!
+    volumes:
+      - db_data:/var/mysql
+  web:
+    build: .
+    restart: always
+    ports:
+      - "9090:9090"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/mancala_game_db?serverTimezone=UTC
+    depends_on:
+      - mysqldb
+volumes:
+  db_data:
